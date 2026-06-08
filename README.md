@@ -66,6 +66,11 @@ Each reads the previous phase's outputs:
 # ... etc
 ```
 
+## Model card
+
+See [MODEL_CARD.md](MODEL_CARD.md) for the full architecture, training, and
+usage summary. Hosted on Ollama: https://ollama.com/sppandita85/story-llm
+
 ## Deliverables
 
 - `phase5_pretrain/pretrained.pt` — the **pretrained base LLM**.

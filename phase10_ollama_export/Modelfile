@@ -4,6 +4,12 @@
 
 FROM ./story-llm.gguf
 
+# Description that travels WITH the model (view via `ollama show --system`).
+# NOTE: the TEMPLATE below intentionally does NOT reference {{ .System }}, so this
+# text is metadata only and is never injected into generation — the tiny model
+# was trained without system prompts, so injecting one would worsen output.
+SYSTEM """story-llm: a 0.94M-parameter GPT built from scratch and trained on 50 children's moral stories. An educational reproduction of the full LLM pipeline (custom BPE -> pretraining -> SFT -> Ollama). Learning artifact only; output is garbled at this scale. Source: https://github.com/sppandita85/story-llm-finetuned-mac"""
+
 # Match the instruction template used during fine-tuning (common/chat_format.py):
 #   <|user|>\n{question}\n<|assistant|>\n{answer}<|endoftext|>
 TEMPLATE """<|user|>
