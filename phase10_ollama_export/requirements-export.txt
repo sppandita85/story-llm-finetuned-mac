@@ -1,0 +1,6 @@
+# Extra dependencies needed ONLY for the Ollama export (Phase 10).
+# The core build (phases 1-9) does not need these.
+# Pinned to versions compatible with torch 2.2.x.
+transformers==4.44.2
+gguf>=0.10
+safetensors>=0.4

@@ -9,6 +9,10 @@ __pycache__/
 phase1_data_prep/*.txt
 phase3_encoding/*.bin
 
+# phase 10: vendored converter (re-clone) and regenerable HF intermediate
+phase10_ollama_export/llama.cpp/
+phase10_ollama_export/hf_model/
+
 # NOTE: we intentionally COMMIT the deliverables so the repo is clone-and-run:
 #   phase2_tokenizer/tokenizer.json   (needed to use the model)
 #   phase5_pretrain/pretrained.pt     (pretrained LLM)

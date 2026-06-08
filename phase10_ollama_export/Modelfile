@@ -1,0 +1,21 @@
+# Ollama Modelfile for the from-scratch story LLM.
+# Build:  cd phase10_ollama_export && ollama create story-llm -f Modelfile
+# Run:    ollama run story-llm "What is the moral of 'The Boy Who Cried Wolf'?"
+
+FROM ./story-llm.gguf
+
+# Match the instruction template used during fine-tuning (common/chat_format.py):
+#   <|user|>\n{question}\n<|assistant|>\n{answer}<|endoftext|>
+TEMPLATE """<|user|>
+{{ .Prompt }}
+<|assistant|>
+"""
+
+# Stop generating when the model emits a turn/document boundary.
+PARAMETER stop "<|endoftext|>"
+PARAMETER stop "<|user|>"
+
+# Sampling (same spirit as phase9_chat).
+PARAMETER temperature 0.7
+PARAMETER top_k 40
+PARAMETER num_ctx 128

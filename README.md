@@ -24,6 +24,7 @@ seeded for reproducibility.
 | 7 | `phase7_qa_dataset/` | derive instruction **Q&A** pairs | SFT data collection |
 | 8 | `phase8_finetune/` | **supervised fine-tuning** (loss masked to answers) | instruction tuning |
 | 9 | `phase9_chat/` | ask the fine-tuned model questions | serving |
+| 10 | `phase10_ollama_export/` | convert to GGUF and host on **Ollama** | deployment |
 
 Shared code lives in `common/`: `config.py` (all hyperparameters + paths),
 `bpe_tokenizer.py` (the BPE algorithm), `model.py` (the GPT transformer), and
@@ -44,7 +45,20 @@ bash run_all.sh                          # phases 1 → 8
 .venv/bin/python phase9_chat/run.py "What is the moral of 'The Boy Who Cried Wolf'?"
 ```
 
-Or run any phase on its own (each reads the previous phase's outputs):
+### Host it on Ollama (optional, Phase 10)
+
+```bash
+bash phase10_ollama_export/build_ollama.sh finetuned
+ollama run story-llm "What is the moral of 'The Boy Who Cried Wolf'?"
+```
+
+This converts the model to GGUF and registers it with Ollama. See
+[phase10_ollama_export/README.md](phase10_ollama_export/README.md). (Output stays
+low-quality at this scale — Ollama serves the model, it doesn't improve it.)
+
+### Run any phase on its own
+
+Each reads the previous phase's outputs:
 
 ```bash
 .venv/bin/python phase1_data_prep/run.py
